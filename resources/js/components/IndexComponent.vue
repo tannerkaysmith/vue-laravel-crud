@@ -13,10 +13,10 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Post Title</th>
-                <th>Post Description</th>
-                <th>Actions</th>
+                <th class="border-0">ID</th>
+                <th class="border-0">Post Title</th>
+                <th class="border-0">Post Description</th>
+                <th class="border-0">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -46,12 +46,16 @@
       });
     },
     methods: {
-      deletePost(id)
-      {
-        let uri = `http://127.0.0.1:8000/api/post/delete/${id}`;
-        this.axios.delete(uri).then(response => {
-          this.posts.splice(this.posts.indexOf(id), 1);
-        });
+      deletePost(id) {
+        let youSure = window.confirm(`Are you sure you want to delete post ${id}?`)
+        if (youSure) {
+            let uri = `http://127.0.0.1:8000/api/post/delete/${id}`;
+            this.axios.delete(uri).then(response => {
+                this.posts.splice(this.posts.indexOf(id), 1);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
       }
     }
   }

@@ -2119,10 +2119,16 @@ __webpack_require__.r(__webpack_exports__);
     deletePost: function deletePost(id) {
       var _this2 = this;
 
-      var uri = "http://127.0.0.1:8000/api/post/delete/".concat(id);
-      this.axios["delete"](uri).then(function (response) {
-        _this2.posts.splice(_this2.posts.indexOf(id), 1);
-      });
+      var youSure = window.confirm("Are you sure you want to delete post ".concat(id, "?"));
+
+      if (youSure) {
+        var uri = "http://127.0.0.1:8000/api/post/delete/".concat(id);
+        this.axios["delete"](uri).then(function (response) {
+          _this2.posts.splice(_this2.posts.indexOf(id), 1);
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     }
   }
 });
@@ -38484,13 +38490,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
+        _c("th", { staticClass: "border-0" }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Post Title")]),
+        _c("th", { staticClass: "border-0" }, [_vm._v("Post Title")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Post Description")]),
+        _c("th", { staticClass: "border-0" }, [_vm._v("Post Description")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Actions")])
+        _c("th", { staticClass: "border-0" }, [_vm._v("Actions")])
       ])
     ])
   }
